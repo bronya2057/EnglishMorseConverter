@@ -1,0 +1,95 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 23,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "DefaultPreset",
+            "displayName": "Private",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "generator": "Ninja"
+        },
+        {
+            "name": "Test",
+            "displayName": "Private",
+            "hidden": true,
+            "cacheVariables": {
+                "TEST_CMAKE": "yes",
+                "BENCHMARK_CMAKE": "yes",
+                "COVERAGE_ON": "yes"
+            }
+        },
+        {
+            "name": "Sanitize",
+            "displayName": "Private",
+            "hidden": true,
+            "cacheVariables": {
+                "ADDRESS_SANITIZER": "yes",
+                "CMAKE_CXX_CPPCHECK": "/usr/bin/cppcheck",
+                "CMAKE_CXX_INCLUDE_WHAT_YOU_USE": "$env{HOME}/Dev/include-what-you-use/build/bin/include-what-you-use",
+                "CMAKE_LINK_WHAT_YOU_USE": true
+            }
+        },
+        {
+            "name": "Qt",
+            "displayName": "Private",
+            "hidden": true,
+            "cacheVariables": {
+                "QT_EXAMPLE": "yes",
+                "CMAKE_TOOLCHAIN_FILE": {
+                    "type": "FILEPATH",
+                    "value": "${sourceDir}/cmakeHelpers/toolchain.cmake"
+                  }
+            }
+        },
+        {
+            "name": "DebugPreset",
+            "displayName": "Private",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "GEN_GRAPHVIZ": "yes"
+            },
+            "inherits": ["DefaultPreset"]
+        },
+        {
+            "name": "ReleasePreset",
+            "displayName": "Private",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            },
+            "inherits": ["DefaultPreset"]
+        },
+        {
+            "name": "Linux",
+            "displayName": "Private",
+            "hidden": true,
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            }
+        },
+        {
+            "name": "Windows",
+            "displayName": "Private",
+            "hidden": true,
+            "generator": "Visual Studio 17 2022",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        }
+    ]
+    
+}

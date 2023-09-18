@@ -1,0 +1,70 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 23,
+        "patch": 0
+    },
+    "include": [
+        "cmakeHelpers/ConfigurePresetsBase.json"
+      ],
+    "configurePresets": [
+        {
+            "name": "LinuxDbg",
+            "displayName": "Linux + DBG + Test + Qt",
+            "description": "Sets Ninja generator, build and install directory",
+
+            "inherits": ["Linux", "DebugPreset", "Test", "Qt"]
+        },
+        {
+            "name": "LinuxRelQt",
+            "displayName": "Linux + Rel + Qt",
+            "description": "Sets Ninja generator, build and install directory",
+
+            "inherits": ["Linux", "ReleasePreset", "Qt"]
+        },
+        {
+            "name": "LinuxDbgSanitize",
+            "displayName": "Linux + DBG + Sanitize",
+            "description": "Sets Ninja generator, build and install directory",
+
+            "inherits": ["Linux", "DebugPreset", "Sanitize"]
+        },
+        {
+            "name": "LinuxDbgSanitizeTest",
+            "displayName": "Linux + DBG + Sanitize + Test",
+            "description": "Sets Ninja generator, build and install directory",
+
+            "inherits": ["Linux", "DebugPreset", "Sanitize", "Test"]
+        },
+        {
+            "name": "LinuxRel",
+            "displayName": "Linux + REL",
+            "description": "Sets Ninja generator, build and install directory",
+
+            "inherits": ["Linux", "ReleasePreset", "Sanitize"]
+        },
+        {
+            "name": "WindowsRelQt",
+            "displayName": "Windows + REL",
+            "description": "Sets Ninja generator, build and install directory",
+
+            "inherits": ["Windows", "ReleasePreset", "Qt"]
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "configurePreset": "ReplicaPreset"
+        }
+    ],
+    "testPresets": [
+    {
+        "name": "default",
+        "configurePreset": "default",
+        "output": {"outputOnFailure": true},
+        "execution": {"noTestsAction": "error", "stopOnFailure": true}
+    }
+    ]
+    
+}

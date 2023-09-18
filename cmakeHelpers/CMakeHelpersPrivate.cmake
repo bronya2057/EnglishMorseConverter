@@ -1,0 +1,42 @@
+function(traceGeneratorExpressionPrivate)
+    if (${ARGC} GREATER  0)
+    set (message "=============================[TRACE IN] ==> ${ARGV1}/CMakeLists.txt\n=============================[MESSAGE] : ${ARGV0}\n")
+    endif()
+    file(GENERATE OUTPUT traceFile.txt CONTENT ${message})
+endfunction()
+
+function(tracePrivate)
+    if (${ARGC} GREATER  0)
+        set (message "\n=============================[TRACE IN] ==> ${ARGV1}/CMakeLists.txt\n=============================[MESSAGE] : ${ARGV0}")
+    endif()
+
+    message("${message}")
+endfunction()
+
+function(addCommonChecksPrivate Target TargetType)
+    if (UNIX)
+        #-O0 -fprofile-arcs -ftest-coverage -Werror
+        list (APPEND COMPILE_OPTIONS -Wall)
+
+        if (ADDRESS_SANITIZER)
+            # -fsanitize=thread
+            list(APPEND COMPILE_OPTIONS -fsanitize=undefined -fsanitize=address -O2)
+
+            #includeClangFormat(${Target})
+            addCppCheck()
+            addClangTidy(${Target})
+            addIncludeWhatYouUse(${Target})
+        endif()
+
+        target_compile_options(${This} ${TargetType}  ${COMPILE_OPTIONS})
+        target_link_options(${This} ${TargetType}  ${COMPILE_OPTIONS})
+    endif (UNIX)
+endfunction()
+
+function(addCoveragePrivate target targetType)
+    if (${COVERAGE_ON})
+        set(COMPILE_OPTIONS -O0 -fprofile-arcs -ftest-coverage)
+        target_compile_options(${target} ${targetType}  ${COMPILE_OPTIONS})
+        target_link_options(${target} ${targetType}  ${COMPILE_OPTIONS})
+    endif()
+endfunction()
