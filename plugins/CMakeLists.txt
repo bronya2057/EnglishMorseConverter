@@ -1,1 +1,2 @@
+add_subdirectory(EnglishMorseMapper)
 add_subdirectory(QMLLiveReloader)

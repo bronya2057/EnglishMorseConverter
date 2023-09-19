@@ -79,7 +79,7 @@ class FileWatcherPrivate : QObject//public QQmlAbstractUrlInterceptor
 
 #if defined(Q_OS_WIN) || (defined(Q_OS_UNIX) && !defined(Q_OS_MACOS))
             QTimer::singleShot(500, &m_fileWatcher, [this,path](){
-                 //m_fileWatcher.addPath(path);
+                 m_fileWatcher.addPath(path);
             });
 #endif
         });

@@ -14,7 +14,7 @@
             "displayName": "Linux + DBG + Test + Qt",
             "description": "Sets Ninja generator, build and install directory",
 
-            "inherits": ["Linux", "DebugPreset", "Test", "Qt"]
+            "inherits": ["Linux", "DebugPreset", "Qt"]
         },
         {
             "name": "LinuxRelQt",

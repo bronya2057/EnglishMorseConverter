@@ -3,12 +3,12 @@ import QtQuick.Window
 import QMLLiveReloader
 
 Window {
-    width: 640
-    height: 480
+    width: 1024
+    height: 768
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Converter between English and Morse code")
 
     LoaderLiveControls {
-        source: "file:///E:/Dev/QtChallenge/EnglishMorseConverter/src/gui/MainLoadable.qml"
+        source: "file:///home/alex/Dev/EnglishMorseConverter/src/gui/MainLoadable.qml"
     }
 }

@@ -39,11 +39,7 @@
             "displayName": "Private",
             "hidden": true,
             "cacheVariables": {
-                "QT_EXAMPLE": "yes",
-                "CMAKE_TOOLCHAIN_FILE": {
-                    "type": "FILEPATH",
-                    "value": "${sourceDir}/cmakeHelpers/toolchain.cmake"
-                  }
+                "QT_EXAMPLE": "yes"
             }
         },
         {

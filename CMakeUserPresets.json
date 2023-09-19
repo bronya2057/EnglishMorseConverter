@@ -16,7 +16,17 @@
 
             "inherits": ["WindowsRelQt"],
             "cacheVariables": {
-                "CMAKE_PREFIX_PATH": "$env{HOME}/Qt/6.5.2/gcc_64/lib/cmake"
+                "CMAKE_PREFIX_PATH": "C:/Qt/6.5.2/msvc2019_64/lib/cmake"
+            }
+        },
+        {
+            "name": "LinuxDbgQtUSER",
+            "displayName": "USER Linux + Dbg + Qt",
+            "description": "Sets Ninja generator, build and install directory",
+
+            "inherits": ["LinuxDbg"],
+            "cacheVariables": {
+                "CMAKE_PREFIX_PATH": "$env{HOME}/Qt/6.5.1/gcc_64/lib/cmake"
             }
         }
     ],
