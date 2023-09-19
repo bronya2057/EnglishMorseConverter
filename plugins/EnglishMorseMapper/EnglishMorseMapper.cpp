@@ -1,5 +1,5 @@
 #include "EnglishMorseMapper.hpp"
-#include "TextTokenizer.hpp"
+#include "TextTraits.hpp"
 
 #include <QRegularExpression>
 #include <QDebug>
@@ -13,8 +13,8 @@ void EnglishMorseMapper::requestTranslateInput(const QString& inputText)
 {
     const QString lowerCaseInput = inputText.toLower();
 
-    const QStringList tokenizedInput = TextTokenizer::getTokens(inputText);
-    const QString translatedText = m_morseMapper.getTranslatedText(tokenizedInput);
+    const QStringList tokenizedInput = TextTraits::getTokens(inputText);
+    const QString translatedText = TextTraits::getTranslatedText(tokenizedInput, m_morseMapper);
 
     m_convertedText = translatedText;
 

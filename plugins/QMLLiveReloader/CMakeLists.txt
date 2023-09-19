@@ -21,5 +21,3 @@ qt_add_qml_module(${This}
 
 target_compile_definitions(${This} 
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-
-outputBinaries(${This})

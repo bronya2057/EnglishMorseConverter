@@ -21,5 +21,4 @@ signals:
 private:
     QString m_convertedText;
     BidirectionalMorseMapper m_morseMapper;
-    
 };

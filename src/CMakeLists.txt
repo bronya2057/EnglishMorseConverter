@@ -20,5 +20,4 @@ target_include_directories(${This} PRIVATE
 target_link_libraries(${This} PRIVATE Qt6::Quick QMLLiveReloaderplugin EnglishMorseMapperplugin)
 target_compile_definitions(${This} PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
-addCommonChecks(${This})
 outputBinaries(${This})

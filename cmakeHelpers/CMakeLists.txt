@@ -2,7 +2,7 @@ include(CMakeHelpersPrivate)
 
 #================MAIN=========================
 function(addCommonChecks Target)
-    addCommonChecksPrivate(${Target} PRIVATE)
+    addCommonChecksPrivate(${Target} PUBLIC)
 endfunction()
 
 function(addCommonChecksInterface Target)

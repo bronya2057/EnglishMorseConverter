@@ -7,7 +7,7 @@ find_package(Qt6 6.5 COMPONENTS Quick REQUIRED)
 
 qt_add_library(${This} STATIC)
 
-target_link_libraries(${This} PRIVATE Qt6::Quick BidirectionalMapper TextTokenizer)
+target_link_libraries(${This} PRIVATE Qt6::Quick BidirectionalMapper TextTraits)
 set_target_properties(${This} PROPERTIES AUTOMOC ON)
 
 qt_add_qml_module(${This} 
@@ -21,5 +21,4 @@ qt_add_qml_module(${This}
 target_compile_definitions(${This} 
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
-addCommonChecks(${This})
 outputBinaries(${This})

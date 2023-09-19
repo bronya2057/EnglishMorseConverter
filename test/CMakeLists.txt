@@ -16,7 +16,7 @@ endif()
 set(Sources
     main.cpp
     EnglishMorseMapperTest.cpp
-    TextTokenizerTest.cpp
+    TextTraitsTest.cpp
 )
 
 add_executable(${This} ${Sources})
@@ -25,7 +25,7 @@ target_link_libraries(
     GTest::gtest_main
     GTest::gmock_main
     BidirectionalMapper
-    TextTokenizer
+    TextTraits
 )
 
 target_include_directories(${This} PRIVATE)
