@@ -55,7 +55,7 @@
     "buildPresets": [
         {
             "name": "default",
-            "configurePreset": "ReplicaPreset"
+            "configurePreset": "MorseMapperPreset"
         }
     ],
     "testPresets": [

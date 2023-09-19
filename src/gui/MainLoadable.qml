@@ -4,14 +4,9 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 import EnglishMorseMapper
 
-Rectangle {
+Item {
     width: 1024
     height: 768
-    border.color: "red"
-
-    EnglishMorseMapper {
-        id: _englishMorseMapper
-    }
 
     ColumnLayout {
         id: _layout
@@ -23,21 +18,21 @@ Rectangle {
         anchors.centerIn: parent
 
         Label {
-            text: "Enter Input in English or Morse code:"
+            text: qsTr("Enter Input in English or Morse code:")
             font.pixelSize: internal.fontPixelSize
         }
 
         TextField {
             id: _textInput
+            
+            font.pixelSize: 24
+            wrapMode: TextInput.Wrap
+            validator: internal.textValidator
 
             Layout.alignment: Qt.AlignHCenter
             Layout.preferredWidth: internal.preferredWidth
             Layout.preferredHeight: internal.preferredHeight
-
-            validator: internal.textValidator
-            wrapMode: TextInput.Wrap
-            font.pixelSize: 24
-
+            
             onTextEdited: {
                 _englishMorseMapper.requestTranslateInput(text);
             }
@@ -45,23 +40,28 @@ Rectangle {
 
 
         Label {
-            text: "Output:"
+            text: qsTr("Output:")
             font.pixelSize: internal.fontPixelSize
         }
 
         TextField {
             id: _textOutput
-            height: 100
+            
+            text: _englishMorseMapper.convertedText
+            font.pixelSize: 24
+            wrapMode: TextInput.Wrap
+            readOnly: true
+
             Layout.alignment: Qt.AlignCenter
             Layout.preferredWidth: internal.preferredWidth
             Layout.preferredHeight: internal.preferredHeight
-            wrapMode: TextInput.Wrap
-            font.pixelSize: 24
-            readOnly: true
-            text: _englishMorseMapper.convertedText
         }
     }
 
+    EnglishMorseMapper {
+        id: _englishMorseMapper
+    }
+    
     QtObject {
         id: internal
 

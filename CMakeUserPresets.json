@@ -24,7 +24,7 @@
             "displayName": "USER Linux + Dbg + Qt",
             "description": "Sets Ninja generator, build and install directory",
 
-            "inherits": ["LinuxDbg"],
+            "inherits": ["LinuxDbg", "Sanitize"],
             "cacheVariables": {
                 "CMAKE_PREFIX_PATH": "$env{HOME}/Qt/6.5.1/gcc_64/lib/cmake"
             }
@@ -33,7 +33,7 @@
     "buildPresets": [
         {
             "name": "default",
-            "configurePreset": "ReplicaPreset"
+            "configurePreset": "MorseMapperPreset"
         }
     ]
 }

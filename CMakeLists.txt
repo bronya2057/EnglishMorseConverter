@@ -20,3 +20,10 @@ add_subdirectory(src)
 enable_testing()
 add_subdirectory(test)
 
+if(${GEN_GRAPHVIZ})
+    add_custom_target(graphviz ALL
+        COMMAND ${CMAKE_COMMAND} "--graphviz=graphviz/foo.dot" .
+        COMMAND dot -Tpng graphviz/foo.dot -o foo.png
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+    )
+endif()

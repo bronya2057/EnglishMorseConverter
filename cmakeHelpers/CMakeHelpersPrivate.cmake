@@ -15,14 +15,11 @@ endfunction()
 
 function(addCommonChecksPrivate Target TargetType)
     if (UNIX)
-        #-O0 -fprofile-arcs -ftest-coverage -Werror
         list (APPEND COMPILE_OPTIONS -Wall)
 
-        if (ADDRESS_SANITIZER)
-            # -fsanitize=thread
+        if (ENABLE_SANITIZERS)
             list(APPEND COMPILE_OPTIONS -fsanitize=undefined -fsanitize=address -O2)
 
-            #includeClangFormat(${Target})
             addCppCheck()
             addClangTidy(${Target})
             addIncludeWhatYouUse(${Target})
@@ -31,12 +28,4 @@ function(addCommonChecksPrivate Target TargetType)
         target_compile_options(${This} ${TargetType}  ${COMPILE_OPTIONS})
         target_link_options(${This} ${TargetType}  ${COMPILE_OPTIONS})
     endif (UNIX)
-endfunction()
-
-function(addCoveragePrivate target targetType)
-    if (${COVERAGE_ON})
-        set(COMPILE_OPTIONS -O0 -fprofile-arcs -ftest-coverage)
-        target_compile_options(${target} ${targetType}  ${COMPILE_OPTIONS})
-        target_link_options(${target} ${targetType}  ${COMPILE_OPTIONS})
-    endif()
 endfunction()

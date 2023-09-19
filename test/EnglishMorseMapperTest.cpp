@@ -3,6 +3,8 @@
 #include "BidirectionalMorseMapper.hpp"
 #include "TextTokenizer.hpp"
 
+#include <QDebug>
+
 class BidirectionalMapperTest : public ::testing::Test
 {
 protected:
@@ -26,23 +28,52 @@ TEST_F(BidirectionalMapperTest, TranslateEnglishText)
     const QString translatedText = m_mapper.getTranslatedText(tokenizedInput);
     const QString expectedText = ".... . .... .";
 
+    qDebug() << "Translated:" << translatedText;
+    qDebug() << "expected:" << expectedText;
+
     EXPECT_EQ(translatedText, expectedText);
 }
 
-// TEST_F(BidirectionalMapperTest, TextMorseTokens)
-// {
-//     QString inputString{". . .- -..."};
+TEST_F(BidirectionalMapperTest, TranslateMorseText)
+{
+    QString inputString{". . .- -..."};
 
-//     const QStringList result = m_tokenizer.getTokens(inputString);
-//     const QStringList expectedList{".", ".", ".-", "-..."};
-//     EXPECT_EQ(result, expectedList);
-// }
+    const QStringList tokenizedInput = TextTokenizer::getTokens(inputString);
+    const QString translatedText = m_mapper.getTranslatedText(tokenizedInput);
+    const QString expectedText = "e e a b";
 
-// TEST_F(BidirectionalMapperTest, MixedEnglishAndMorseTokens)
-// {
-//     QString inputString{"He. Ar. .- -...Yu-..."};
+    qDebug() << "Translated:" << translatedText;
+    qDebug() << "expected:" << expectedText;
 
-//     const QStringList result = m_tokenizer.getTokens(inputString);
-//     const QStringList expectedList{"h", "e", ".", "a", "r", ".", ".-", "-...", "y", "u", "-..."};
-//     EXPECT_EQ(result, expectedList);
-// }
+    EXPECT_EQ(translatedText, expectedText);
+}
+
+TEST_F(BidirectionalMapperTest, TranslateMixedText)
+{
+    QString inputString{"He. Ar. .- -...Yu-..."};
+
+    const QStringList tokenizedInput = TextTokenizer::getTokens(inputString);
+    const QString translatedText = m_mapper.getTranslatedText(tokenizedInput);
+    const QString expectedText = ".... . e .- .-. e a b -.-- ..- b";
+
+    qDebug() << "Translated:" << translatedText;
+    qDebug() << "expected:" << expectedText;
+    
+    EXPECT_EQ(translatedText, expectedText);
+}
+
+TEST_F(BidirectionalMapperTest, TranslateErrorText)
+{
+    QString inputString{"..... ............"};
+
+    const QStringList tokenizedInput = TextTokenizer::getTokens(inputString);
+    const QString translatedText = m_mapper.getTranslatedText(tokenizedInput);
+    const QString expectedText = "# #";
+
+    qDebug() << "tokenizedInput:" << tokenizedInput;
+    qDebug() << "Translated:" << translatedText;
+    qDebug() << "expected:" << expectedText;
+    
+    EXPECT_EQ(translatedText, expectedText);
+}
+

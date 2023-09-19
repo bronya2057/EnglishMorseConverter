@@ -1,6 +1,8 @@
 #include <QObject>
 #include <QtQml>
 
+#include "BidirectionalMorseMapper.hpp"
+
 class EnglishMorseMapper : public QObject
 {
     Q_OBJECT
@@ -18,4 +20,6 @@ signals:
 
 private:
     QString m_convertedText;
+    BidirectionalMorseMapper m_morseMapper;
+    
 };

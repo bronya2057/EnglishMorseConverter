@@ -23,10 +23,9 @@ function(traceVars)
     message("[INSTALL_DIR] = ${CMAKE_INSTALL_PREFIX}")
     message("[ROOT_CMAKE] = ${CMAKE_SOURCE_DIR}")
     message("[CMAKE_BINARY_DIR] = ${CMAKE_BINARY_DIR}")
-    message("[Qt5DIR] = ${Qt5_DIR}")
     message("[CMAKE_MODULE_PATH] = ${CMAKE_MODULE_PATH}")
     message("[CMAKE_PREFIX_PATH] = ${CMAKE_PREFIX_PATH}")
-    message("[ADDRESS_SANITIZER] = ${ADDRESS_SANITIZER}")
+    message("[ENABLE_SANITIZERS] = ${ENABLE_SANITIZERS}")
     message("[GEN_GRAPHVIZ] = ${GEN_GRAPHVIZ}")
     message("[COVERAGE_ON] = ${COVERAGE_ON}")
     message("=============[CMAKE_VARIABLES_END]========")
@@ -60,22 +59,6 @@ function(installGoogleBenchmark)
                          GIT_PROGRESS TRUE
     )
     FetchContent_MakeAvailable(benchmark)
-endfunction()
-
-function(installJSON)
-    message("Fetching nlohmann::json ...")
-    include(FetchContent)
-
-    FetchContent_Declare(json
-    GIT_REPOSITORY https://github.com/nlohmann/json
-    GIT_TAG v3.7.3
-    GIT_PROGRESS TRUE)
-
-    FetchContent_GetProperties(json)
-    if(NOT json_POPULATED)
-    FetchContent_Populate(json)
-    add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)
-    endif()
 endfunction()
 
 macro(includeClangFormat target)
@@ -187,19 +170,4 @@ function(addIncludeWhatYouUse target)
     endif()
 
     set(CXX_INCLUDE_WHAT_YOU_USE ${iwyu_path})
-
-    #set_property(TARGET ${target} PROPERTY CXX_INCLUDE_WHAT_YOU_USE ${iwyu_path})
-endfunction()
-
-#=============================MEMORY===================================
-#The ~/.valgrindrc file (in your home directory)
-#The $VALGRIND_OPTS environment variable
-#The ./.valgrindrc file (in the working directory)
-function(addValgrind target)
-  find_program(VALGRIND_PATH valgrind REQUIRED)
-  add_custom_target(valgrind
-    COMMAND ${VALGRIND_PATH} --leak-check=yes
-            $<TARGET_FILE:${target}>
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
-
 endfunction()
