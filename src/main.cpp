@@ -1,8 +1,6 @@
 #include <QGuiApplication>
-#include <QQmlApplicationEngine>
 #include <QtQml/qqmlextensionplugin.h>
 #include "FileWatcher.h"
-#include "EnglishMorseMapper.hpp"
 
 Q_IMPORT_QML_PLUGIN(QMLLiveReloaderPlugin)
 Q_IMPORT_QML_PLUGIN(EnglishMorseMapperPlugin)

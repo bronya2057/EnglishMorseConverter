@@ -1,5 +1,6 @@
 #include "EnglishMorseMapper.hpp"
 #include "BidirectionalMapper.hpp"
+#include "TextTokenizer.hpp"
 
 #include <QRegularExpression>
 #include <QDebug>
@@ -11,14 +12,13 @@ EnglishMorseMapper::EnglishMorseMapper(QObject *parent)
 
 void EnglishMorseMapper::requestTranslateInput(const QString& inputText)
 {
-    QString result;
+    const QString lowerCaseInput = inputText.toLower();
 
-    QRegularExpression englishTokenRegex{QStringLiteral("^[A-Za-z]+")};
-    QRegularExpression morseTokenRegex{QStringLiteral("^[.-]+")};
+    const QStringList tokensResult = TextTokenizer::getTokens(inputText);
 
-    qDebug() << "Input:" << inputText;
+    qDebug() << "tokensResult" << tokensResult;
 
-    m_convertedText = result;
+    m_convertedText = tokensResult.join("");
 
     emit textConverted(m_convertedText);
 }

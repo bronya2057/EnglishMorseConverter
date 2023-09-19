@@ -7,7 +7,7 @@ find_package(Qt6 6.5 COMPONENTS Quick REQUIRED)
 
 qt_add_library(${This} STATIC)
 
-target_link_libraries(${This} PRIVATE Qt6::Quick BidirectionalMapper)
+target_link_libraries(${This} PRIVATE Qt6::Quick BidirectionalMapper TextTokenizer)
 set_target_properties(${This} PROPERTIES AUTOMOC ON)
 
 qt_add_qml_module(${This} 

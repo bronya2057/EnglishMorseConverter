@@ -16,5 +16,7 @@ qt_standard_project_setup(REQUIRES 6.5)
 add_subdirectory(lib)
 add_subdirectory(plugins)
 add_subdirectory(src)
+
+enable_testing()
 add_subdirectory(test)
 

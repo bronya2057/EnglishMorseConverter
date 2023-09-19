@@ -1,71 +1,48 @@
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 
-#include "BidirectionalMapper.hpp"
+#include "BidirectionalMorseMapper.hpp"
+#include "TextTokenizer.hpp"
 
-// struct ExampleTests : public ::testing::Test
-// {
-//    int *x;
-
-//    int getX()
-//    {
-//       return *x;
-//    }
-
-//    virtual void SetUp() override
-//    {
-//       x = new int(55);
-//    }
-
-//    virtual void TearDown() override
-//    {
-//       delete x;
-//    }
-// };
-
-TEST(BidirectionalMapper, BidirectionalMapperInit)
+class BidirectionalMapperTest : public ::testing::Test
 {
-   BidirectionalMapper mapper;
-   EXPECT_EQ(mapper.getValue(), 5);
+protected:
+   BidirectionalMorseMapper m_mapper;
+};
+
+TEST_F(BidirectionalMapperTest, BidirectionalMapperInit)
+{
+    QString inputString{""};
+    const QStringList tokenizedInput = TextTokenizer::getTokens(inputString);
+    const QString translatedText = m_mapper.getTranslatedText(tokenizedInput);
+
+    EXPECT_EQ(translatedText, "");
 }
 
-// TEST_F(ExampleTests, Demo)
+TEST_F(BidirectionalMapperTest, TranslateEnglishText)
+{
+    QString inputString{"He H E "};
+
+    const QStringList tokenizedInput = TextTokenizer::getTokens(inputString);
+    const QString translatedText = m_mapper.getTranslatedText(tokenizedInput);
+    const QString expectedText = ".... . .... .";
+
+    EXPECT_EQ(translatedText, expectedText);
+}
+
+// TEST_F(BidirectionalMapperTest, TextMorseTokens)
 // {
-//     EXPECT_TRUE(getX());
-//     EXPECT_EQ(getX(), 56);
-//     EXPECT_EQ(false, true) << "Reason of fail could be written here"<< 254;
-//     EXPECT_TRUE(getX());
-//     EXPECT_TRUE(getX());
+//     QString inputString{". . .- -..."};
+
+//     const QStringList result = m_tokenizer.getTokens(inputString);
+//     const QStringList expectedList{".", ".", ".-", "-..."};
+//     EXPECT_EQ(result, expectedList);
 // }
 
-// TEST_F(ExampleTests, Demo1)
+// TEST_F(BidirectionalMapperTest, MixedEnglishAndMorseTokens)
 // {
-//     const int temp = getX();
-//     EXPECT_TRUE(getX());
-//     EXPECT_EQ(getX(), 56);
-//     ASSERT_TRUE(false) << "Reason of fail could be written here"<< 254;
-//     EXPECT_TRUE(getX());
-//     EXPECT_TRUE(getX());
-// }
+//     QString inputString{"He. Ar. .- -...Yu-..."};
 
-// TEST(FactorialTest, Zero) {
-//   EXPECT_EQ(1, 1);
-// }
-
-// using testing::Eq;
-
-// class SoundexEncoding : public testing::Test //Google Mock instantiates the fixture class once per test
-// {
-// public:
-//    Soundex soundex;
-// };
-
-// TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord)
-// {
-//    EXPECT_THAT(soundex.encode("Ab"), Eq("A100"));
-// }
-
-// TEST_F(SoundexEncoding, DISABLED_PadsWithZerosToEnsureThreeDigits)
-// {
-//    ASSERT_THAT(soundex.encode("I"), Eq("I000"));
+//     const QStringList result = m_tokenizer.getTokens(inputString);
+//     const QStringList expectedList{"h", "e", ".", "a", "r", ".", ".-", "-...", "y", "u", "-..."};
+//     EXPECT_EQ(result, expectedList);
 // }
