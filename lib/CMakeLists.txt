@@ -1,0 +1,2 @@
+add_subdirectory(BidirectionalMapper)
+add_subdirectory(TextTraits)
