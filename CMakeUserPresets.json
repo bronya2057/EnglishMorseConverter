@@ -11,8 +11,8 @@
     "configurePresets": [
         {
             "name": "WindowsRelQtUser",
-            "displayName": "USER Windows + Rel + Qt",
-            "description": "Sets Ninja generator, build and install directory",
+            "displayName": "USER Windows + Rel",
+            "description": "Windows user preset to build the project",
 
             "inherits": ["WindowsRelQt"],
             "cacheVariables": {
@@ -21,13 +21,16 @@
         },
         {
             "name": "LinuxDbgQtUSER",
-            "displayName": "USER Linux + Dbg + Qt",
-            "description": "Sets Ninja generator, build and install directory",
+            "displayName": "USER Linux + Dbg + Test",
+            "description": "Linux user preset to build and test the project",
 
-            "inherits": ["LinuxDbg", "Test"],
+            "inherits": ["LinuxDbgQt", "Test"],
             "cacheVariables": {
                 "CMAKE_PREFIX_PATH": "$env{HOME}/Qt/6.5.1/gcc_64/lib/cmake",
                 "INCLUDE_WHAT_YOU_USE_PATH": "$env{HOME}/Dev/include-what-you-use/build/bin"
+            },
+            "environment": {
+                "QML_LIVE_RELOADER_WATCH_PATH": "$env{HOME}/Dev/EnglishMorseConverter/src/gui"
             }
         }
     ],

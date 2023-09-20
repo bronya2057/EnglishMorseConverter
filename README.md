@@ -1,34 +1,20 @@
-# README #
+# EnglishMorseConverter #
 
-Repo for learning how to work with CMake and some libs.
+EnglishMorseConverter is a simple C++/QML gui application that can translate between English and Morse letters
 
-### Changelog ###
-* Updated to Qt6
-* Integrated QML live reloader
+## How do I get set up? ##
+1. Install base dependencies: Qt6.5, cmake
+2. Modify CMakeUserPresets.json to reflect paths from your local machine, or create preset that will suit your needs from templates in CMakePresets.json
+3. Run cmake with created user preset
 
-### Tested with next configuration (Windows/Ubuntu)  ###
-* CMake 3.20.0  
-* Qt 6.5.1 
+## Additional packages ##
+Install additional dependencies if needed: cppcheck, clang-format, lcov + genhtml, clang-tidy, include-what-you-use
 
-### How do I get set up? ###
-sudo snap install cmake
-sudo apt install python3-pip
-sudo pip3 install conan
+To activate additional checks on each target please refer to cmakeHelpers/CMakeLists.txt
 
-### Additional packages
-sudo apt install clang-format
+## Cmake config ##
+If any variables are missing for CMake Configuration, refer to cmakeHelpers/ConfigurePresetsBase.json or CMakePresets.json and reuse/extend one of the predefined presets
 
-### Conan ###
-1. Issue command: conan profile detect
-2. Create conanfile.txt/conanfile.py with list dependencies
-3. Issue command: conan install . --output-folder=build/dependencies/conan --build=missing
-4. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
+## License
 
-### CMakeVariables to set ###
-* BENCHMARK_CMAKE - Enables fetching and applying small example of GoogleBenchmark
-* TEST_CMAKE      - Enables fetching and applying small example of GoogleTest
-
-* QT_EXAMPLE         - Enables Qt examples
-* Qt5_DIR            - Mandatory to specify if QT config files not in PATH (ex. "QtFolder/lib/cmake/Qt5")
-* Qt5_QUICK_COMPILER - Mandatory only for Linux (ex. "QtFolder/lib/cmake/Qt5QuickCompiler")
-* CMAKE_PREFIX_PATH  - Path to cmake lib folder (ex. "QtFolder/lib/cmake/Qt6")
+[MIT](https://choosealicense.com/licenses/mit/)

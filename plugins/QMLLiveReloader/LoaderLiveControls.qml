@@ -1,5 +1,11 @@
 import QtQuick
 
+// brief Component that allows live reloading of QML files
+// usage:
+// LoaderLiveControls {
+//     source: "file://fullpathToQml.qml"
+// }
+
 Loader {
     id: root
 
@@ -7,7 +13,6 @@ Loader {
         target: QmlFileWatcher
 
         function onReloaded(path) {
-            console.error("onReloaded");
             let sourceTemp = source;
             root.source = ""
             root.source = sourceTemp;

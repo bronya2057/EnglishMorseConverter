@@ -57,7 +57,7 @@ void initFileWatcher(QQmlApplicationEngine *engine, const QString& rootSourcePat
     }
 }
 
-class FileWatcherPrivate : QObject//public QQmlAbstractUrlInterceptor
+class FileWatcherPrivate : QObject
 {
     Q_DISABLE_COPY(FileWatcherPrivate)
     Q_DECLARE_PUBLIC(FileWatcher)
@@ -67,8 +67,6 @@ class FileWatcherPrivate : QObject//public QQmlAbstractUrlInterceptor
         q_ptr(q),
         m_engine(_engine)
     {
-        //m_engine->addUrlInterceptor(this);
-
         QObject::connect(&m_fileWatcher, &QFileSystemWatcher::fileChanged, q_ptr, [&](QString const& path) {
             qCDebug(log) << "File changed:" << path;
             if ( ! autoReload)
@@ -94,15 +92,6 @@ class FileWatcherPrivate : QObject//public QQmlAbstractUrlInterceptor
             }
         }
     }
-
-    // QUrl intercept(QUrl const& url, QQmlAbstractUrlInterceptor::DataType type) final
-    // {
-    //     if (type == QQmlAbstractUrlInterceptor::QmlFile) {
-    //         m_fileWatcher.addPath(url.path());
-    //         qCInfo(log) << QString("Add file to watch: %1").arg(url.path());
-    //     }
-    //     return url;
-    // }
 
     void reloadQml(QString const& path)
     {
@@ -163,33 +152,4 @@ void FileWatcher::reloadQml(QString const& path)
     d->reloadQml(path);
 }
 
-} //namespace LiveReloader
-
-
-// #include "loaderlive.h"
-
-// #include <QPainter>
-
-// LoaderLive::LoaderLive(QQuickItem *parent)
-//     : QQuickPaintedItem(parent)
-// {
-//     // By default, QQuickItem does not draw anything. If you subclass
-//     // QQuickItem to create a visual item, you will need to uncomment the
-//     // following line and re-implement updatePaintNode()
-
-//     // setFlag(ItemHasContents, true);
-// }
-
-// void LoaderLive::paint(QPainter *painter)
-// {
-//     QPen pen(QColorConstants::Red, 2);
-//     QBrush brush(QColorConstants::Red);
-
-//     painter->setPen(pen);
-//     painter->setBrush(brush);
-//     painter->drawRect(0, 0, 100, 100);
-// }
-
-// LoaderLive::~LoaderLive()
-// {
-// }
+} //namespace QmlLiveReload

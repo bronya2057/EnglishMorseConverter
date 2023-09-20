@@ -66,22 +66,3 @@ private:
 };
 
 } //namespace QmlLiveReload
-
-
-// #ifndef LOADERLIVE_H
-// #define LOADERLIVE_H
-
-// #include <QtQuick/QQuickPaintedItem>
-
-// class LoaderLive : public QQuickPaintedItem
-// {
-//     Q_OBJECT
-//     QML_ELEMENT
-//     Q_DISABLE_COPY(LoaderLive)
-// public:
-//     explicit LoaderLive(QQuickItem *parent = nullptr);
-//     void paint(QPainter *painter) override;
-//     ~LoaderLive() override;
-// };
-
-// #endif // LOADERLIVE_H

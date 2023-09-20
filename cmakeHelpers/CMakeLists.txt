@@ -20,7 +20,6 @@ endfunction()
 
 function(traceVars)
     message("=============[CMAKE_VARIABLES]============")
-    message("[INSTALL_DIR] = ${CMAKE_INSTALL_PREFIX}")
     message("[ROOT_CMAKE] = ${CMAKE_SOURCE_DIR}")
     message("[CMAKE_BINARY_DIR] = ${CMAKE_BINARY_DIR}")
     message("[CMAKE_MODULE_PATH] = ${CMAKE_MODULE_PATH}")

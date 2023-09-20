@@ -5,11 +5,12 @@ find_package(Qt6 6.5 COMPONENTS Quick Gui REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+qt_standard_project_setup(REQUIRES 6.5)
 qt_add_executable(${This} main.cpp)
 qt_add_qml_module(${This}
     URI ${This}
     VERSION 1.0
-    QML_FILES gui/Main.qml gui/MainLoadable.qml
+    QML_FILES gui/Main.qml gui/ConverterView.qml
     OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${This}
     RESOURCE_PREFIX /obrodskyi/imports
 )

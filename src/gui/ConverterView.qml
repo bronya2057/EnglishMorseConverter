@@ -6,16 +6,11 @@ import EnglishMorseMapper
 
 Item {
     ColumnLayout {
-        id: _layout
-
-        spacing: 50
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
         anchors.centerIn: parent
-
+        spacing: 50
+        
         Label {
-            text: qsTr("Enter Input in English or Morse code:")
+            text: qsTr("Enter Input in English or space seperated Morse code:")
             font.pixelSize: internal.fontPixelSize
         }
 
@@ -24,7 +19,7 @@ Item {
             
             font.pixelSize: 24
             wrapMode: TextInput.Wrap
-            validator: internal.textValidator
+            validator: internal.userInputValidator
 
             Layout.alignment: Qt.AlignHCenter
             Layout.preferredWidth: internal.preferredWidth
@@ -35,7 +30,6 @@ Item {
             }
         }
 
-
         Label {
             text: qsTr("Output:")
             font.pixelSize: internal.fontPixelSize
@@ -44,7 +38,7 @@ Item {
         TextField {
             id: _textOutput
             
-            text: _englishMorseMapper.convertedText
+            text: _englishMorseMapper.translatedText
             font.pixelSize: 24
             wrapMode: TextInput.Wrap
             readOnly: true
@@ -52,6 +46,13 @@ Item {
             Layout.alignment: Qt.AlignCenter
             Layout.preferredWidth: internal.preferredWidth
             Layout.preferredHeight: internal.preferredHeight
+        }
+
+        Label {
+            text: qsTr("Errors (#) ocurred in translation")
+            font.pixelSize: internal.errorfontPixelSize
+            visible: _englishMorseMapper.errorInTranslation
+            color: "red"
         }
     }
 
@@ -65,6 +66,7 @@ Item {
         readonly property int preferredWidth: 800
         readonly property int preferredHeight: 200
         readonly property int fontPixelSize: 24
-        readonly property RegularExpressionValidator textValidator: RegularExpressionValidator {regularExpression: /^[A-Za-z .-]*$/}
+        readonly property int errorfontPixelSize: 20
+        readonly property RegularExpressionValidator userInputValidator: RegularExpressionValidator {regularExpression: /^[A-Za-z .-]*$/}
     }
 }

@@ -19,7 +19,6 @@
             "hidden": true,
             "cacheVariables": {
                 "TEST_CMAKE": "yes",
-                "BENCHMARK_CMAKE": "yes",
                 "COVERAGE_ON": "yes"
             }
         },
@@ -31,14 +30,6 @@
                 "ENABLE_SANITIZERS": "yes",
                 "CMAKE_CXX_CPPCHECK": "/usr/bin/cppcheck",
                 "CMAKE_LINK_WHAT_YOU_USE": true
-            }
-        },
-        {
-            "name": "Qt",
-            "displayName": "Private",
-            "hidden": true,
-            "cacheVariables": {
-                "QT_EXAMPLE": "yes"
             }
         },
         {
