@@ -30,7 +30,6 @@
             "cacheVariables": {
                 "ENABLE_SANITIZERS": "yes",
                 "CMAKE_CXX_CPPCHECK": "/usr/bin/cppcheck",
-                "CMAKE_CXX_INCLUDE_WHAT_YOU_USE": "$env{HOME}/Dev/include-what-you-use/build/bin/include-what-you-use",
                 "CMAKE_LINK_WHAT_YOU_USE": true
             }
         },

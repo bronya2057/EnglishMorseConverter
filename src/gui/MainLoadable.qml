@@ -5,9 +5,6 @@ import QtQuick.Controls.Material
 import EnglishMorseMapper
 
 Item {
-    width: 1024
-    height: 768
-
     ColumnLayout {
         id: _layout
 

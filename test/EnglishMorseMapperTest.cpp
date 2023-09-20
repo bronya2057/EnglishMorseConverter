@@ -77,3 +77,48 @@ TEST_F(BidirectionalMapperTest, TranslateErrorText)
     EXPECT_EQ(translatedText, expectedText);
 }
 
+TEST_F(BidirectionalMapperTest, TemplatedVersion)
+{
+    const QVector<QPair<QChar, QString>> englishMorseMapping = {
+        {'a', QStringLiteral(".-")},
+        {'b', QStringLiteral("-...")},
+        {'c', QStringLiteral("-.-.")},
+        {'d', QStringLiteral("-..")},
+        {'e', QStringLiteral(".")},
+        {'f', QStringLiteral("..-.")},
+        {'g', QStringLiteral("--.")},
+        {'h', QStringLiteral("....")},
+        {'i', QStringLiteral("..")},
+        {'j', QStringLiteral(".---")},
+        {'k', QStringLiteral("-.-")},
+        {'l', QStringLiteral(".-..")},
+        {'m', QStringLiteral("--")},
+        {'n', QStringLiteral("-.")},
+        {'o', QStringLiteral("---")},
+        {'p', QStringLiteral(".--.")},
+        {'q', QStringLiteral("--.-")},
+        {'r', QStringLiteral(".-.")},
+        {'s', QStringLiteral("...")},
+        {'t', QStringLiteral("-")},
+        {'u', QStringLiteral("..-")},
+        {'v', QStringLiteral("...-")},
+        {'w', QStringLiteral(".--")},
+        {'x', QStringLiteral("-..-")},
+        {'y', QStringLiteral("-.--")},
+        {'z', QStringLiteral("--..")}
+    };
+    TBidirectionalMapper<QChar, QString> mBidirectionalMap {englishMorseMapping};
+    EXPECT_EQ(mBidirectionalMap.map('a'), ".-");
+    EXPECT_EQ(mBidirectionalMap.map(".-"), 'a');
+}
+
+TEST_F(BidirectionalMapperTest, TemplatedVersionInt)
+{
+    const QVector<QPair<int, float>> englishMorseMapping = {
+        {25, 33.0f},
+        {77, 55.0f},
+    };
+    TBidirectionalMapper<int, float> mBidirectionalMap {englishMorseMapping};
+    EXPECT_EQ(mBidirectionalMap.map(25), 33.0f);
+    EXPECT_EQ(mBidirectionalMap.map(55.0f), 77);
+}

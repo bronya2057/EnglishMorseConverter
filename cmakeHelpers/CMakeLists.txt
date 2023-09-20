@@ -31,7 +31,7 @@ function(traceVars)
     message("=============[CMAKE_VARIABLES_END]========")
 endfunction()
 
-#================FETCH========================
+#================FETCH_EXTERNAL========================
 set(FETCHCONTENT_QUIET FALSE)
 
 function(installGoogleTest)
@@ -40,8 +40,7 @@ function(installGoogleTest)
     FetchContent_Declare(
         googletest
         GIT_REPOSITORY https://github.com/google/googletest.git
-        #GIT_TAG        release-1.11.0
-        GIT_TAG main # latest commit
+        GIT_TAG main
       )
     if (WIN32)
         # Prevent overriding the parent project's compiler/linker settings
@@ -55,7 +54,7 @@ function(installGoogleBenchmark)
     include(FetchContent)
     FetchContent_Declare(benchmark
                          GIT_REPOSITORY https://github.com/google/benchmark.git
-                         GIT_TAG c05843a9f622db08ad59804c190f98879b76beba # release-1.10.0
+                         GIT_TAG c05843a9f622db08ad59804c190f98879b76beba
                          GIT_PROGRESS TRUE
     )
     FetchContent_MakeAvailable(benchmark)
@@ -79,7 +78,7 @@ macro(includeClangFormat target)
 
 endmacro()
 
-#=====================DEPLOY================
+#=====================DEPLOY======================
 function (outputBinaries Target)
     set (DESTINATION ${Target})
 
@@ -106,12 +105,8 @@ function (generateCoverageTarget)
     set(CMAKE_CXX_FLAGS_DEBUG "-O0 -coverage")
 
     add_custom_target(coverage_custom
-    # gather data
     COMMAND ${LCOV} -c -d ${CMAKE_SOURCE_DIR} -o lcov_base.info
     COMMAND ${LCOV} --remove lcov_base.info '/usr/include/*' '${CMAKE_BINARY_DIR}/_deps/*' -o filtered_coverage.info
-    #COMMAND ${LCOV} --directory . --capture --output-file coverage.info
-    # generate report
-    #--demangle-cpp -o coverage coverage.info
     COMMAND ${GENHTML} filtered_coverage.info --output-directory out
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 endfunction()
@@ -121,7 +116,7 @@ endfunction()
 # 2. Build coverage custom target
 # 3. Optionally use GCovViewer in vscode
 function (addCoverage target)
-    addCoveragePrivate(${target} PRIVATE)
+    addCoveragePrivate(${target} PUBLIC)
 endfunction()
 
 function (addCoverageInterface target)
@@ -129,7 +124,6 @@ function (addCoverageInterface target)
 endfunction()
 
 #====================STATIC ANALYZER==============================
-# sudo apt install cppcheck
 function(addCppCheck)
     find_program(CMAKE_CXX_CPPCHECK NAMES cppcheck)
     if (CMAKE_CXX_CPPCHECK)
@@ -153,15 +147,14 @@ function(addClangTidy target)
   )
 endfunction()
 
-# 1. git clone https://github.com/include-what-you-use/include-what-you-use.git
-# 2. git checkout clang_Version.Minor e.g. clang_14.0
-# 3. cmake -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/lib/llvm-7 ../include-what-you-use
-# Troubleshoot sudo apt install libclang-14-dev
-
+# 1. install libclang-14-dev
+# 2. git clone https://github.com/include-what-you-use/include-what-you-use.git
+# 3. git checkout clang_Version.Minor e.g. clang_14.0
+# 4. cmake -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/lib/llvm-7 ../include-what-you-use
 function(addIncludeWhatYouUse target)
     find_program(iwyu_path 
     NAMES include-what-you-use iwyu
-    PATHS "/home/alex/Dev/include-what-you-use/build/bin/"
+    PATHS ${INCLUDE_WHAT_YOU_USE_PATH}
     NO_DEFAULT_PATH
     REQUIRED)
 

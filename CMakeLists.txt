@@ -27,3 +27,7 @@ if(${GEN_GRAPHVIZ})
         WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
     )
 endif()
+
+if(${COVERAGE_ON})
+    generateCoverageTarget()
+endif()
